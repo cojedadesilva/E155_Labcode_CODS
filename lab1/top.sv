@@ -9,5 +9,5 @@ module top(
 	output  logic [6:0] number
 );
 leds_co leds_co(s[3:0], fpga_blink_out, led0, led1);
-lab1_co lab1_co(s[3:0], number[6:0]); 
+sevseg sevseg(s[3:0], number[6:0]); 
 endmodule
