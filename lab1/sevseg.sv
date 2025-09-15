@@ -5,7 +5,7 @@ This file transforms a 4 bit signal in the s pins to a hex display (number)
 */
 
 
-module lab1_co(
+module sevseg(
 	input 	logic	[3:0] s,
 	output 	logic   [6:0] number
 );
