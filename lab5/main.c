@@ -24,7 +24,7 @@ volatile float RPS = 0; //revolutions per second
 void EXTI1_IRQHandler(void) {  // Interrupt on PA1
       if(EXTI->PR1 & (1<<1)){
         EXTI->PR1 |= (1 << 1);  // Clear interrupt flag
-        /*if (!switchdir)*/ dir = !(dir ^ lastPin); //really lastpin is xor(lastpin,currentpin), where current pin depends if the edge was in PA1 or PA2, so no ! ahead to adjust for this
+        if (!switchdir) dir = !(dir ^ lastPin); //really lastpin is xor(lastpin,currentpin), where current pin depends if the edge was in PA1 or PA2, so no ! ahead to adjust for this
         lastPin = 0; //0 means that the last interrupt came from PA1, 1 means PA2
         Count += (2*(dir)-1); //adds 1 if dir = 0 and -1 if dir = 1
   }
@@ -33,7 +33,7 @@ void EXTI1_IRQHandler(void) {  // Interrupt on PA1
 void EXTI2_IRQHandler(void) {  // Interrupt on PA2 
       if(EXTI->PR1 & (1<<2)){
         EXTI->PR1 |= (1 << 2);  // Clear interrupt flag
-        /*if (!switchdir)*/ dir = (dir ^ lastPin);//really lastpin is xor(lastpin,currentpin), where current pin depends if the edge was in PA1 or PA2, so ! ahead to adjust for this
+        if (!switchdir) dir = (dir ^ lastPin);//really lastpin is xor(lastpin,currentpin), where current pin depends if the edge was in PA1 or PA2, so ! ahead to adjust for this
         lastPin = 1; //0 means that the last interrupt came from PA1, 1 means PA2
         Count += (2*(dir)-1); //adds 1 if dir = 0 and -1 if dir = 1
   }
@@ -66,3 +66,4 @@ int main(void) {
     }  
   }
 }
+
